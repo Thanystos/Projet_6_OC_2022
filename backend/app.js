@@ -4,7 +4,10 @@ const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://Thanystos:Devilplop0@cluster0.asgmhcu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true,
+const path = require('path');
+
+mongoose.connect('mongodb+srv://Thanystos:Devilplop0@cluster0.asgmhcu.mongodb.net/?retryWrites=true&w=majority', 
+{ useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -23,5 +26,6 @@ app.use(express.json()); // Permet d'intercepter toute réponse json envoyée
 // app.use(bodyParser.json());  Voir const bodyParser
 
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
