@@ -2,6 +2,8 @@ const express = require('express');
 // const bodyParser = require('body-parser'); // On peut utiliser bodyparser pour intercepter le json plutôt qu'express
 const mongoose = require('mongoose');
 
+const userRoutes = require('./routes/user');
+
 mongoose.connect('mongodb+srv://Thanystos:Devilplop0@cluster0.asgmhcu.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -16,5 +18,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+app.use(express.json()); // Permet d'intercepter toute réponse json envoyée
+// app.use(bodyParser.json());  Voir const bodyParser
+
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
