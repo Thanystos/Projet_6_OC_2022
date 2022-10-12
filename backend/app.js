@@ -2,6 +2,7 @@ const express = require('express');
 // const bodyParser = require('body-parser'); // On peut utiliser bodyparser pour intercepter le json plutôt qu'express
 const mongoose = require('mongoose');
 
+const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
 const path = require('path');
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 app.use(express.json()); // Permet d'intercepter toute réponse json envoyée
 // app.use(bodyParser.json());  Voir const bodyParser
 
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
